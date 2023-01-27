@@ -14,6 +14,8 @@ const {v4: uuidv4} = require ('uuid');
 
 app.use(bodyParser.json());
 
+app.use(express.static('pub'))
+
 app.get("/", (req, res) => {
     
     res.send("We go gym?");
