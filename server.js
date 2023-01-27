@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
     res.send("We go gym?");
 });
 
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
     
     const loginUser = req.body.userName;
     
@@ -27,7 +27,9 @@ app.post('/login', (req, res) => {
     
     console.log('Login Username: ' + loginUser);
     
-    if (loginUser == "googlemail123@gmail.com" && loginPassword == "Taco1!"){
+    const correctPassword = await redisClient.hGet('UserMap',loginUser);
+
+    if (loginPassword == correctPassword){
         
         const loginToken = uuidv4();
         
