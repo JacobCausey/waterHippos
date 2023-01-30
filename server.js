@@ -35,6 +35,8 @@ app.post('/login', async (req, res) => {
         
         const loginToken = uuidv4();
         
+        await redisClient.hSet('TokenMap',loginToken,loginUser);
+
         res.send(loginToken);
     } 
     else {
