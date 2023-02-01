@@ -15,10 +15,25 @@
 
 
     $(document).ready(function(){
+        
         startandstopbutton = document.getElementById('startandstopbutton');
+        
         counterbutton = document.getElementById('counterbutton');
+        
         let hash= location.hash;//will include the #
+        
         let hashparts = hash.split("#");
+        
+        const cookies = document.cookie;
+        
+        const cookieValue = document.cookie
+        .split(":")
+        .find((row) => row.startsWith('stedicookie'))
+        ?.split('=')[1];
+
+
+        console.log(cookiesValue == null));
+
         if (hashparts.length < 2) {
             window.location="/"; //there is no login token on the url, so they must not have logged in yet, we will help redirect them here
         } else {
