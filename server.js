@@ -16,14 +16,20 @@ app.use(bodyParser.json());
 
 app.use(express.static('pub'))
 
+const cookieParser = require('cookie-parser');
+
+app.use(cookieParser());
+
 app.get("/", (req, res) => {
     
     res.send("We go gym?");
 });
 
-app.get("/validate/:loginToken", async(req, res) => {
+app.get("/validate", async(req, res) => {
     
-    const loginToken = req.params.loginToken;
+    const loginToken = req.cookies.stedicookie;
+
+    console.log("Login token: ", loginToken);
 
     const loginUser = await redisClient.hGet('TokenMap', loginToken);
     
