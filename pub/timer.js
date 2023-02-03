@@ -28,12 +28,14 @@
         
         const cookieValue = document.cookie.split(":").find((row) => row.startsWith('stedicookie'))?.split('=')[1];
 
-        console.log(cookiesValue == null);
+        console.log(cookieValue == null);
 
         if (cookieValue == null) {
             window.location="/"; //there is no login token on the url, so they must not have logged in yet, we will help redirect them here
-        } else {
-            usertoken = hashparts[1];// the url should look like https://stedi.me/timer.html#4c2286a7-8fdc-47c5-b972-739769554c88
+        } 
+        
+        else {
+            usertoken = cookieValue;// the url should look like https://stedi.me/timer.html#4c2286a7-8fdc-47c5-b972-739769554c88
             validateToken();//check if token is expired, if not display the email, if expired send to login
         }
     });
@@ -89,7 +91,7 @@
         let tokenEmail="";
         $.ajax({
            type: 'GET',
-            url: '/validate/'+usertoken,
+            url: '/validate',
             success: function(data){
                if (data==""){
                  window.location="/"
