@@ -26,15 +26,11 @@
         
         const cookies = document.cookie;
         
-        const cookieValue = document.cookie
-        .split(":")
-        .find((row) => row.startsWith('stedicookie'))
-        ?.split('=')[1];
+        const cookieValue = document.cookie.split(":").find((row) => row.startsWith('stedicookie'))?.split('=')[1];
 
+        console.log(cookiesValue == null);
 
-        console.log(cookiesValue == null));
-
-        if (hashparts.length < 2) {
+        if (cookieValue == null) {
             window.location="/"; //there is no login token on the url, so they must not have logged in yet, we will help redirect them here
         } else {
             usertoken = hashparts[1];// the url should look like https://stedi.me/timer.html#4c2286a7-8fdc-47c5-b972-739769554c88
