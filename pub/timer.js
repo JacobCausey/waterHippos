@@ -47,7 +47,6 @@
     };
 
 
-
     const saveRapidStepTest = (rapidStepTest) => {
         $.ajax({
             type: 'POST',
@@ -57,8 +56,7 @@
                 401: () => window.location.href="/",
             },
             headers: { "suresteps.session.token": usertoken},
-            contentType: "application/text",
-            dataType: 'text'
+            contentType: "application/json",
         });
 
     }
@@ -120,7 +118,7 @@
         	startandstop();
         	let testTime = stepTime-starttime;
             let rapidStepTest = {
-               token: usertoken,
+               //token: usertoken,
                startTime: starttime,
                stopTime: stepTime,
                testTime: testTime,
