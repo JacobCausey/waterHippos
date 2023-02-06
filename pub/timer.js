@@ -118,7 +118,7 @@
         	startandstop();
         	let testTime = stepTime-starttime;
             let rapidStepTest = {
-               //token: usertoken,
+               token: usertoken,
                startTime: starttime,
                stopTime: stepTime,
                testTime: testTime,
