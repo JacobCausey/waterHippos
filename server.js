@@ -20,6 +20,20 @@ const cookieParser = require('cookie-parser');
 
 app.use(cookieParser());
 
+app.use(async function(req, res, next) {
+
+    var cookie = req.cookies.stedicookie;
+
+    if(cookie === undefined && !req.url.includes("login") && !req.url.includes("html") && req.url !== '/' && !req.url.includes('js')) {
+        res.status(401);
+        res.send("No more cookies, sad Cookie Monster!")
+    }
+    else{
+        res.status(200);
+        next();
+    }
+});
+
 app.post('/rapidsteptest', async (req, res) => {
 
     const steps = req.body;
