@@ -102,3 +102,11 @@ dist
 
 # TernJS port file
 .tern-port
+
+#Hide our keys for the site.
+
+#Private Key file
+server.cert 
+
+#Server Key file
+server.key
