@@ -110,3 +110,7 @@ server.cert
 
 #Server Key file
 server.key
+
+#Chain
+chain.pem
+
