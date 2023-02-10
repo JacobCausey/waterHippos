@@ -2,7 +2,7 @@ const express = require('express');
 
 const app = express();
 
-const port = 3000;
+const port = 443;
 
 const bodyParser = require('body-parser');
 
@@ -106,7 +106,9 @@ https.createServer(
     {
     key: fs.readFileSync('./server.key'), 
     
-    cert: fs.readFileSync('./server.cert') 
+    cert: fs.readFileSync('./server.cert'),
+
+    ca:fs.readFileSync('./chain.pem') 
 },
 
 app)
