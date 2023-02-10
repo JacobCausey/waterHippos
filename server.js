@@ -12,6 +12,10 @@ const redisClient = Redis.createClient({url:'redis://127.0.0.1:6379'});
 
 const {v4: uuidv4} = require ('uuid');
 
+const https = require('https');
+
+const fs = require('fs');
+
 app.use(bodyParser.json());
 
 app.use(express.static('pub'))
@@ -91,12 +95,27 @@ app.post('/login', async (req, res) => {
     
 });
 
-app.listen(port, () => {
+/*app.listen(port, () => {
     
     redisClient.connect();
 
     console.log("Listening");
-});
+});*/
 
+https.createServer(
+    {
+    key: fs.readFileSync('./server.key'), 
+    
+    cert: fs.readFileSync('./server.cert') 
+},
 
+app.listen(port, () => {
+    
+    redisClient.connect();
+
+    console.log('Listening on port ' + port);
+
+})
+
+)
 
