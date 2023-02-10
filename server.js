@@ -109,13 +109,12 @@ https.createServer(
     cert: fs.readFileSync('./server.cert') 
 },
 
-app.listen(port, () => {
+app)
+.listen(port, () => {
     
     redisClient.connect();
 
     console.log('Listening on port ' + port);
 
-})
-
-)
+});
 
