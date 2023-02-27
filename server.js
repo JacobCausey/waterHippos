@@ -104,11 +104,11 @@ app.post('/login', async (req, res) => {
 
 https.createServer(
     {
-    key: fs.readFileSync('./server.key'), 
+    key: fs.readFileSync('/etc/letsencrypt/live/jacobcausey.cit270.com/privkey.pem'), 
     
-    cert: fs.readFileSync('./server.cert'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/jacobcausey.cit270.com//cert.pem'),
 
-    ca:fs.readFileSync('./chain.pem') 
+    ca:fs.readFileSync('/etc/letsencrypt/live/jacobcausey.cit270.com/fullchain.pem') 
 },
 
 app)
