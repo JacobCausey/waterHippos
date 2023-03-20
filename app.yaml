@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+
+kind: Deployment
+metadata:
+  name: cit270jacobservice
+spec:
+    replicas: 1
+
+    selector:
+      matchLabels:
+        app: myapp
+    template:
+      metadata:
+        name: cit270jacobservice
+        labels:
+          app: myapp
+      spec:
+        containers:
+        - name: cit270jacobservice
+        image: <Image>
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: <Port>
