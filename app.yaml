@@ -1,47 +1,61 @@
 apiVersion: apps/v1
+
 kind: Deployment
+
 metadata:
+
   name: cit270jacobservice
+  
 spec:
+
     replicas: 1
+
     selector:
+
       matchLabels:
-        app: myapp
+        
+        app: cit270jacobservice
     template:
       metadata:
         name: cit270jacobservice
         labels:
-          app: myapp
+          app: cit270jacobservice
       spec:
         containers:
         - name: cit270jacobservice
           image: jcausey/cit270-fall2022
 
           volumeMounts:
-            - mountPath: "/etc/letsencrypt/live/jacobcausey.cit270.com"
-              name: ssl
-              command: ["npm"]
-              args: ["run","start"]
+          - name: ssl
+              
+            mountPath: "/etc/letsencrypt/live/jacobcausey.cit270.com"
+              
+          command: ["npm"]
+          args: ["run","start"]
 
-              respources:
-                requests:
-                  cpu: 0.125
-                  memory: 500Mi
-                  limits:
-                    cpu: 0.125
-                    memory: 600Mi
-                imagePullPolicy: Always
-              volumes:
-              - name: ssl
-                secret:
-                  secretName: jacobcerts
-___
+          respources:
+            requests:
+              cpu: 0.125
+              memory: 500Mi
+            limits:
+              cpu: 0.125
 
+              memory: 600Mi
+          imagePullPolicy: Always
+        volumes:
+          - name: ssl
+            secret:
+              secretName: jacobcerts
+---
 apiVersion: v1
+
 kind: Service
+
 metadata:
+
   name: cit270jacobservice-loadbalancer
 spec:
+
   selector:
     app: cit270jacobservice
   type: LoadBalancer
