@@ -20,3 +20,34 @@ spec:
           args: ["--requirepass", "$(REDIS_PASS)", "--appendonly", "yes", "--save","900", "1", "--save", "30", "2"]
           ports:
             - containerPort: 6397
+              name: redis
+          env:
+          - name: REDIS_PASS
+            valueFrom:
+              secretKeyRef:
+                name: redis-secret-jacob
+                key: REDIS_PASS
+          volumeMounts:
+            - name: redis-jacob-volume
+              mountPath: /data
+  volumeClaimTemplates:
+  - metadata: 
+      name: redis-jacob-volume
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 10Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-stedi-jacob
+spec:
+  ports:
+    - port: 6379
+      name: redis
+  clusterIP: None
+  selector:
+    app: redis-stedi-jacob
