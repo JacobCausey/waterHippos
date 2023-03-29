@@ -1,28 +1,22 @@
-containers:
-  - name: redis-stedi-jacob
-    image: redis:7.0.5-alpine
-    imagePullPolicy: Always
-    args: ["--requirepass", "$(REDIS_PASS)", "--appendonly", "yes", "--save",
-    "900", "1", "--save", "30", "2"]
-    ports:
-      - containerPort: 6397
-      name: redis
-    env:
-    - name: REDIS_PASS
-      valueFrom:
-        secretKeyRef:
-          name: redis-secrets-jacob
-          key: REDIS_PASS
-    volumeMounts:
-      - name: redis-stedi-jacob
-        mountPath: /data
-  volumeClaimTemplates:
-    -metadata:
-        name: redis-stedi-jacob
-      spec:
-        accessModes:
-          -ReadWriteOnce
-      resources:
-        requests:
-          storage: 10Gi
-
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis-stedi-jacob
+spec:
+  selector:
+    matchLabels:
+      app: redis-stedi-jacob
+  serviceName: redis-stedi-jacob
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: redis-stedi-jacob
+    spec:
+      containers:
+        - name: redis-stedi-jacob
+          image: redis:7.0.5-apline
+          imagePullPolicy: Always
+          args: ["--requirepass", "$(REDIS_PASS)", "--appendonly", "yes", "--save","900", "1", "--save", "30", "2"]
+          ports:
+            - containerPort: 6397
