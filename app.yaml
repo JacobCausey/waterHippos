@@ -25,15 +25,15 @@ spec:
         - name: cit270jacobservice
           image: jcausey/cit270-fall2022
 
-          volumeMounts:
-          - name: ssl
+         # volumeMounts:
+          #- name: ssl
               
-            mountPath: "/etc/letsencrypt/live/jacobcausey.cit270.com"
+          #  mountPath: "/etc/letsencrypt/live/jacobcausey.cit270.com"
               
           command: ["npm"]
           args: ["run","start"]
 
-          respources:
+          resources:
             requests:
               cpu: 0.125
               memory: 500Mi
@@ -42,10 +42,10 @@ spec:
 
               memory: 600Mi
           imagePullPolicy: Always
-        volumes:
-          - name: ssl
-            secret:
-              secretName: jacobcerts
+        #volumes:
+          #- name: ssl
+           # secret:
+            #  secretName: jacobcerts
 ---
 apiVersion: v1
 

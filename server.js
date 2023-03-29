@@ -2,7 +2,7 @@ const express = require('express');
 
 const app = express();
 
-const port = 443;
+const port = 3000;
 
 const bodyParser = require('body-parser');
 
@@ -95,14 +95,14 @@ app.post('/login', async (req, res) => {
     
 });
 
-/*app.listen(port, () => {
+app.listen(port, () => {
     
     redisClient.connect();
 
     console.log("Listening");
-});*/
+});
 
-https.createServer(
+/*https.createServer(
     {
     key: fs.readFileSync('/etc/letsencrypt/live/jacobcausey.cit270.com/privkey.pem'), 
     
@@ -119,4 +119,4 @@ app)
     console.log('Listening on port ' + port);
 
 });
-
+*/
