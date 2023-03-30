@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 
 const Redis = require('redis');
 
-const redisClient = Redis.createClient({url:'redis://127.0.0.1:6379'});
+const redisClient = Redis.createClient({url:'redis://default:N2vdWGsGX5PTTgS3@redis-stedi-jacob:6379'});
 
 const {v4: uuidv4} = require ('uuid');
 
@@ -30,7 +30,7 @@ app.use(async function(req, res, next) {
 
     if(cookie === undefined && !req.url.includes("login") && !req.url.includes("html") && req.url !== '/' && !req.url.includes('js')) {
         res.status(401);
-        res.send("No more cookies, sad Cookie Monster!")
+            res.send("No more cookies, sad Cookie Monster!")
     }
     else{
         res.status(200);
