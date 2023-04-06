@@ -46,19 +46,56 @@ spec:
           #- name: ssl
            # secret:
             #  secretName: jacobcerts
+#---
+# apiVersion: v1
+
+# kind: Service
+
+# metadata:
+
+#   name: cit270jacobservice-loadbalancer
+# spec:
+
+#   selector:
+#     app: cit270jacobservice
+#   type: LoadBalancer
+#   ports:
+#   - port: 443
+#     targetPort: 443
 ---
 apiVersion: v1
-
 kind: Service
-
 metadata:
-
-  name: cit270jacobservice-loadbalancer
+  name: stedi-jacobcausey-nodeport
 spec:
-
   selector:
     app: cit270jacobservice
-  type: LoadBalancer
   ports:
-  - port: 443
-    targetPort: 443
+  - port: 80
+    targetPort: 3000
+---
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: stedi-jacobcausey-certificate
+spec:
+  domains:
+    - jacobcausey.cit270.com
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: stedi-jacobcausey-ingress
+  labels:
+    name: myingress
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: stedi-jacobcausey-nodeport
+            port: 
+              number: 80
