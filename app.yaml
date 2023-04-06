@@ -23,7 +23,7 @@ spec:
       spec:
         containers:
         - name: cit270jacobservice
-          image: jcausey/cit270-fall2022
+          image: gcr.io/kubernetesproject2/cit270-fall2022
 
          # volumeMounts:
           #- name: ssl
