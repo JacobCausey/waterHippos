@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 
 const Redis = require('redis');
 
-const redisClient = Redis.createClient({url:'redis://default:N2vdWGsGX5PTTgS3@10.8.9.164:6379'});
+const redisClient = Redis.createClient({url:'redis://default:goudacheese4u@10.8.9.164:6379'});
 
 const {v4: uuidv4} = require ('uuid');
 
